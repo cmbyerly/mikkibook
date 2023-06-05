@@ -8,7 +8,7 @@
 Name "${APPNAMEANDVERSION}"
 InstallDir "$PROFILE\Mikki Book"
 InstallDirRegKey HKLM "Software\${APPNAME}" ""
-OutFile "MikkiBookWF\bin\Release\publish\MikkiBookWF.exe"
+OutFile "MikkiBookWF.exe"
 
 ; Modern interface settings
 !include "MUI.nsh"
