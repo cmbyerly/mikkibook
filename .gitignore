@@ -396,3 +396,5 @@ FodyWeavers.xsd
 
 # JetBrains Rider
 *.sln.iml
+/MikkiBookWF/MikkiBookWF.exe_makensisw_temp
+/MikkiBookWF/MikkiBookWF.exe
