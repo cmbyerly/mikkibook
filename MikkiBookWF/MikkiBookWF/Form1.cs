@@ -54,6 +54,7 @@ namespace MikkiBookWF
                 txtCheckNum.Text = string.Empty;
                 dtRecDate.Value = DateTime.Now;
                 dtTransDate.Value = DateTime.Now;
+                chkReconciled.Checked = false;
             }
             catch (Exception ex)
             {
