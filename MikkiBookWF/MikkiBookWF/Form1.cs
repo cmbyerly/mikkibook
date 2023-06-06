@@ -27,7 +27,7 @@ namespace MikkiBookWF
                         txtDescription.Text,
                         ttype.TransactionTypeCode,
                         dtTransDate.Value,
-                        dtRecDate.Value,
+                        chkReconciled.Checked ? dtRecDate.Value : null,
                         ttype.IsCredit ? Math.Abs(Convert.ToDecimal(txtAmount.Text)) : Math.Abs(Convert.ToDecimal(txtAmount.Text)) * -1,
                         txtCheckNum.Text);
 
@@ -41,7 +41,7 @@ namespace MikkiBookWF
                     accountTransaction.TransType = ttype.TransactionTypeCode;
                     accountTransaction.CheckNumber = txtCheckNum.Text;
                     accountTransaction.Amount = ttype.IsCredit ? Math.Abs(Convert.ToDecimal(txtAmount.Text)) : Math.Abs(Convert.ToDecimal(txtAmount.Text)) * -1;
-                    accountTransaction.ReconciliationDate = dtRecDate.Value;
+                    accountTransaction.ReconciliationDate = chkReconciled.Checked ? dtRecDate.Value : null;
                     accountTransaction.Description = txtDescription.Text;
 
                     dbContext.AccountTransactions.Update(accountTransaction);
@@ -123,6 +123,8 @@ namespace MikkiBookWF
 
                 tempContext.Dispose();
                 tempContext = null;
+
+                btnDelete.Enabled = false;
             }
             catch { }
         }
@@ -140,13 +142,14 @@ namespace MikkiBookWF
                 var item = (AccountTransaction)this.lstTrans.SelectedItem;
 
                 this.currentId = item.Id;
-                txtAmount.Text = Math.Abs(item.Amount).ToString();
+                txtAmount.Text = Math.Abs(item.Amount).ToString("N2");
                 txtDescription.Text = item.Description;
                 txtCheckNum.Text = item.CheckNumber;
-                dtRecDate.Value = item.ReconciliationDate == null ? DateTime.Now : (DateTime)item.ReconciliationDate;
+                dtRecDate.Value = item.ReconciliationDate == null ? new DateTime(1754, 1, 1) : (DateTime)item.ReconciliationDate;
+                chkReconciled.Checked = item.ReconciliationDate == null ? false : true;
                 dtTransDate.Value = item.TransactionDate;
 
-                for(int i = 0; i < this.cmbTransType.Items.Count; i++)
+                for (int i = 0; i < this.cmbTransType.Items.Count; i++)
                 {
                     var ttype = (TransactionTypes)this.cmbTransType.Items[i];
 
@@ -155,6 +158,8 @@ namespace MikkiBookWF
                         this.cmbTransType.SelectedIndex = i;
                     }
                 }
+
+                btnDelete.Enabled = true;
             }
             catch (Exception ex)
             {
@@ -178,6 +183,8 @@ namespace MikkiBookWF
                 dtTransDate.Value = DateTime.Now;
 
                 this.bwRebuildTransList.RunWorkerAsync();
+
+                btnDelete.Enabled = false;
             }
             catch (Exception ex)
             {

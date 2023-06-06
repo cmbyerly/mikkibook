@@ -50,7 +50,8 @@ namespace MikkiBookWF.DataModel
 
         public override string ToString()
         {
-            return $"{Id} - {TransType} - {Description} - {Amount}";
+            var amtchar = Amount >= 0.00M ? "+" : string.Empty;
+            return $"{TransType.PadRight(2, ' ')} - {Description.PadRight(100, ' ')} - {amtchar}{Amount.ToString("N2")}";
         }
     }
 }
