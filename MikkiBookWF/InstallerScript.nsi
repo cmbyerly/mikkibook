@@ -2,7 +2,7 @@
 
 ; Define your application name
 !define APPNAME "Mikki Book"
-!define APPNAMEANDVERSION "Mikki Book 0.3"
+!define APPNAMEANDVERSION "Mikki Book 0.4"
 
 ; Main Install settings
 Name "${APPNAMEANDVERSION}"

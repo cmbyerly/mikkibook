@@ -4,16 +4,33 @@ using MikkiBookWF.UIClasses;
 
 namespace MikkiBookWF
 {
+    /// <summary>
+    ///   Form1
+    /// </summary>
     public partial class Form1 : Form
     {
+        /// <summary>The database context</summary>
         private AccountContext? dbContext;
+
+        /// <summary>The current identifier</summary>
         private long currentId = 0;
 
+        /// <summary>The transaction list</summary>
+        private List<AccountTransaction> transactionList = new List<AccountTransaction>();
+
+        /// <summary>Initializes a new instance of the <see cref="Form1" /> class.</summary>
         public Form1()
         {
             InitializeComponent();
+
+            this.gvAccount.Columns["Amount"].DefaultCellStyle.Format = "c";
+            this.gvAccount.Columns["TransactionDate"].DefaultCellStyle.Format = "d";
+            this.gvAccount.Columns["ReconciliationDate"].DefaultCellStyle.Format = "d";
         }
 
+        /// <summary>Handles the Click event of the btnSave control.</summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="EventArgs" /> instance containing the event data.</param>
         private void btnSave_Click(object sender, EventArgs e)
         {
             try
@@ -64,6 +81,9 @@ namespace MikkiBookWF
             this.bwRebuildTransList.RunWorkerAsync();
         }
 
+        /// <summary>Handles the Load event of the Form1 control.</summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="EventArgs" /> instance containing the event data.</param>
         private void Form1_Load(object sender, EventArgs e)
         {
             this.dbContext = new AccountContext();
@@ -77,6 +97,9 @@ namespace MikkiBookWF
             this.cmbTransType.Items.AddRange(TransactionTypes.GetTransactionTypes());
         }
 
+        /// <summary>Handles the Click event of the btnNew control.</summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="EventArgs" /> instance containing the event data.</param>
         private void btnNew_Click(object sender, EventArgs e)
         {
             try
@@ -94,13 +117,16 @@ namespace MikkiBookWF
             }
         }
 
+        /// <summary>Handles the DoWork event of the bwRebuildTransList control.</summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="System.ComponentModel.DoWorkEventArgs" /> instance containing the event data.</param>
         private void bwRebuildTransList_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
         {
             try
             {
-                this.lstTrans.Invoke(() =>
+                this.gvAccount.Invoke(() =>
                 {
-                    this.lstTrans.Items.Clear();
+                    this.transactionList.Clear();
                 });
 
                 decimal balance = 0.00M;
@@ -111,15 +137,21 @@ namespace MikkiBookWF
                 {
                     balance = balance + trans.Amount;
 
-                    this.lstTrans.Invoke(() =>
+                    this.gvAccount.Invoke(() =>
                     {
-                        this.lstTrans.Items.Add(trans.Clone());
+                        this.transactionList.Add((AccountTransaction)trans.Clone());
                     });
                 }
 
                 this.lblBalance.Invoke(() =>
                 {
                     lblBalance.Text = $"${balance}";
+                });
+
+                this.gvAccount.Invoke(() =>
+                {
+                    this.gvAccount.DataSource = this.transactionList;
+                    this.gvAccount.Refresh();
                 });
 
                 tempContext.Dispose();
@@ -130,17 +162,59 @@ namespace MikkiBookWF
             catch { }
         }
 
+        /// <summary>Handles the FormClosing event of the Form1 control.</summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="FormClosingEventArgs" /> instance containing the event data.</param>
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
             this.dbContext?.Dispose();
             this.dbContext = null;
         }
 
-        private void lstTrans_SelectedIndexChanged(object sender, EventArgs e)
+        /// <summary>Handles the Click event of the btnDelete control.</summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="EventArgs" /> instance containing the event data.</param>
+        private void btnDelete_Click(object sender, EventArgs e)
         {
             try
             {
-                var item = (AccountTransaction)this.lstTrans.SelectedItem;
+                AccountTransaction accountTransaction = dbContext.AccountTransactions.First(x => x.Id == currentId);
+                this.dbContext.AccountTransactions.Remove(accountTransaction);
+                this.dbContext.SaveChanges();
+
+                this.currentId = 0;
+                txtAmount.Text = string.Empty;
+                txtDescription.Text = string.Empty;
+                txtCheckNum.Text = string.Empty;
+                dtRecDate.Value = DateTime.Now;
+                dtTransDate.Value = DateTime.Now;
+
+                this.bwRebuildTransList.RunWorkerAsync();
+
+                btnDelete.Enabled = false;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+        }
+
+        /// <summary>Handles the CellClick event of the gvAccount control.</summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="DataGridViewCellEventArgs" /> instance containing the event data.</param>
+        private void gvAccount_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        /// <summary>Handles the RowEnter event of the gvAccount control.</summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="DataGridViewCellEventArgs" /> instance containing the event data.</param>
+        private void gvAccount_RowEnter(object sender, DataGridViewCellEventArgs e)
+        {
+            try
+            {
+                var item = (AccountTransaction)this.gvAccount.Rows[e.RowIndex].DataBoundItem;
 
                 this.currentId = item.Id;
                 txtAmount.Text = Math.Abs(item.Amount).ToString("N2");
@@ -168,29 +242,15 @@ namespace MikkiBookWF
             }
         }
 
-        private void btnDelete_Click(object sender, EventArgs e)
+        private void exitToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            try
-            {
-                AccountTransaction accountTransaction = dbContext.AccountTransactions.First(x => x.Id == currentId);
-                this.dbContext.AccountTransactions.Remove(accountTransaction);
-                this.dbContext.SaveChanges();
+            this.Close();
+        }
 
-                this.currentId = 0;
-                txtAmount.Text = string.Empty;
-                txtDescription.Text = string.Empty;
-                txtCheckNum.Text = string.Empty;
-                dtRecDate.Value = DateTime.Now;
-                dtTransDate.Value = DateTime.Now;
-
-                this.bwRebuildTransList.RunWorkerAsync();
-
-                btnDelete.Enabled = false;
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.ToString());
-            }
+        private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            AboutMikkiBook aboutMikkiBook = new AboutMikkiBook();
+            aboutMikkiBook.ShowDialog();
         }
     }
 }

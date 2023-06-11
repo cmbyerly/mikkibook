@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            components = new System.ComponentModel.Container();
             groupBox1 = new GroupBox();
             chkReconciled = new CheckBox();
             btnNew = new Button();
@@ -45,12 +46,30 @@
             label2 = new Label();
             label1 = new Label();
             btnDelete = new Button();
-            lstTrans = new ListBox();
             bwRebuildTransList = new System.ComponentModel.BackgroundWorker();
             groupBox2 = new GroupBox();
             lblBalance = new Label();
+            accountContextBindingSource = new BindingSource(components);
+            accountContextBindingSource1 = new BindingSource(components);
+            gvAccount = new DataGridView();
+            Id = new DataGridViewTextBoxColumn();
+            Description = new DataGridViewTextBoxColumn();
+            TransType = new DataGridViewTextBoxColumn();
+            TransactionDate = new DataGridViewTextBoxColumn();
+            ReconciliationDate = new DataGridViewTextBoxColumn();
+            Amount = new DataGridViewTextBoxColumn();
+            CheckNumber = new DataGridViewTextBoxColumn();
+            menuStrip1 = new MenuStrip();
+            fileToolStripMenuItem = new ToolStripMenuItem();
+            exitToolStripMenuItem = new ToolStripMenuItem();
+            helpToolStripMenuItem = new ToolStripMenuItem();
+            aboutToolStripMenuItem = new ToolStripMenuItem();
             groupBox1.SuspendLayout();
             groupBox2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)accountContextBindingSource).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)accountContextBindingSource1).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)gvAccount).BeginInit();
+            menuStrip1.SuspendLayout();
             SuspendLayout();
             // 
             // groupBox1
@@ -71,9 +90,9 @@
             groupBox1.Controls.Add(label2);
             groupBox1.Controls.Add(label1);
             groupBox1.Font = new Font("Times New Roman", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            groupBox1.Location = new Point(12, 12);
+            groupBox1.Location = new Point(12, 44);
             groupBox1.Name = "groupBox1";
-            groupBox1.Size = new Size(466, 378);
+            groupBox1.Size = new Size(466, 346);
             groupBox1.TabIndex = 0;
             groupBox1.TabStop = false;
             groupBox1.Text = "Entry";
@@ -227,25 +246,13 @@
             btnDelete.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             btnDelete.Enabled = false;
             btnDelete.Font = new Font("Times New Roman", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            btnDelete.Location = new Point(484, 12);
+            btnDelete.Location = new Point(484, 44);
             btnDelete.Name = "btnDelete";
             btnDelete.Size = new Size(664, 23);
             btnDelete.TabIndex = 11;
             btnDelete.Text = "Delete";
             btnDelete.UseVisualStyleBackColor = true;
             btnDelete.Click += btnDelete_Click;
-            // 
-            // lstTrans
-            // 
-            lstTrans.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            lstTrans.Font = new Font("Times New Roman", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            lstTrans.FormattingEnabled = true;
-            lstTrans.ItemHeight = 15;
-            lstTrans.Location = new Point(484, 36);
-            lstTrans.Name = "lstTrans";
-            lstTrans.Size = new Size(664, 559);
-            lstTrans.TabIndex = 1;
-            lstTrans.SelectedIndexChanged += lstTrans_SelectedIndexChanged;
             // 
             // bwRebuildTransList
             // 
@@ -272,15 +279,128 @@
             lblBalance.TabIndex = 0;
             lblBalance.Text = "0.00";
             // 
+            // accountContextBindingSource
+            // 
+            accountContextBindingSource.DataSource = typeof(Context.AccountContext);
+            // 
+            // accountContextBindingSource1
+            // 
+            accountContextBindingSource1.DataSource = typeof(Context.AccountContext);
+            // 
+            // gvAccount
+            // 
+            gvAccount.AllowUserToAddRows = false;
+            gvAccount.AllowUserToDeleteRows = false;
+            gvAccount.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            gvAccount.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            gvAccount.Columns.AddRange(new DataGridViewColumn[] { Id, Description, TransType, TransactionDate, ReconciliationDate, Amount, CheckNumber });
+            gvAccount.Location = new Point(484, 76);
+            gvAccount.MultiSelect = false;
+            gvAccount.Name = "gvAccount";
+            gvAccount.ReadOnly = true;
+            gvAccount.RowTemplate.Height = 25;
+            gvAccount.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            gvAccount.Size = new Size(664, 528);
+            gvAccount.TabIndex = 12;
+            gvAccount.RowEnter += gvAccount_RowEnter;
+            // 
+            // Id
+            // 
+            Id.DataPropertyName = "Id";
+            Id.HeaderText = "Id";
+            Id.Name = "Id";
+            Id.ReadOnly = true;
+            // 
+            // Description
+            // 
+            Description.DataPropertyName = "Description";
+            Description.HeaderText = "Description";
+            Description.Name = "Description";
+            Description.ReadOnly = true;
+            // 
+            // TransType
+            // 
+            TransType.DataPropertyName = "TransType";
+            TransType.HeaderText = "Transaction Type";
+            TransType.Name = "TransType";
+            TransType.ReadOnly = true;
+            // 
+            // TransactionDate
+            // 
+            TransactionDate.DataPropertyName = "TransactionDate";
+            TransactionDate.HeaderText = "Transaction Date";
+            TransactionDate.Name = "TransactionDate";
+            TransactionDate.ReadOnly = true;
+            // 
+            // ReconciliationDate
+            // 
+            ReconciliationDate.DataPropertyName = "ReconciliationDate";
+            ReconciliationDate.HeaderText = "Reconciliation Date";
+            ReconciliationDate.Name = "ReconciliationDate";
+            ReconciliationDate.ReadOnly = true;
+            // 
+            // Amount
+            // 
+            Amount.DataPropertyName = "Amount";
+            Amount.HeaderText = "Amount";
+            Amount.Name = "Amount";
+            Amount.ReadOnly = true;
+            // 
+            // CheckNumber
+            // 
+            CheckNumber.DataPropertyName = "CheckNumber";
+            CheckNumber.HeaderText = "Check Number";
+            CheckNumber.Name = "CheckNumber";
+            CheckNumber.ReadOnly = true;
+            // 
+            // menuStrip1
+            // 
+            menuStrip1.Items.AddRange(new ToolStripItem[] { fileToolStripMenuItem, helpToolStripMenuItem });
+            menuStrip1.Location = new Point(0, 0);
+            menuStrip1.Name = "menuStrip1";
+            menuStrip1.Size = new Size(1160, 24);
+            menuStrip1.TabIndex = 13;
+            menuStrip1.Text = "menuStrip1";
+            // 
+            // fileToolStripMenuItem
+            // 
+            fileToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { exitToolStripMenuItem });
+            fileToolStripMenuItem.Name = "fileToolStripMenuItem";
+            fileToolStripMenuItem.Size = new Size(37, 20);
+            fileToolStripMenuItem.Text = "&File";
+            // 
+            // exitToolStripMenuItem
+            // 
+            exitToolStripMenuItem.Name = "exitToolStripMenuItem";
+            exitToolStripMenuItem.Size = new Size(180, 22);
+            exitToolStripMenuItem.Text = "E&xit";
+            exitToolStripMenuItem.Click += exitToolStripMenuItem_Click;
+            // 
+            // helpToolStripMenuItem
+            // 
+            helpToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { aboutToolStripMenuItem });
+            helpToolStripMenuItem.Name = "helpToolStripMenuItem";
+            helpToolStripMenuItem.Size = new Size(44, 20);
+            helpToolStripMenuItem.Text = "&Help";
+            // 
+            // aboutToolStripMenuItem
+            // 
+            aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
+            aboutToolStripMenuItem.Size = new Size(180, 22);
+            aboutToolStripMenuItem.Text = "&About";
+            aboutToolStripMenuItem.Click += aboutToolStripMenuItem_Click;
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1160, 616);
+            Controls.Add(gvAccount);
             Controls.Add(groupBox2);
-            Controls.Add(lstTrans);
             Controls.Add(btnDelete);
             Controls.Add(groupBox1);
+            Controls.Add(menuStrip1);
+            MainMenuStrip = menuStrip1;
             Name = "Form1";
             Text = "Mikki Book";
             FormClosing += Form1_FormClosing;
@@ -289,7 +409,13 @@
             groupBox1.PerformLayout();
             groupBox2.ResumeLayout(false);
             groupBox2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)accountContextBindingSource).EndInit();
+            ((System.ComponentModel.ISupportInitialize)accountContextBindingSource1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)gvAccount).EndInit();
+            menuStrip1.ResumeLayout(false);
+            menuStrip1.PerformLayout();
             ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
@@ -299,7 +425,6 @@
         private Label label1;
         private Label label3;
         private Label label4;
-        private ListBox lstTrans;
         private TextBox txtAmount;
         private DateTimePicker dtRecDate;
         private ComboBox cmbTransType;
@@ -315,5 +440,20 @@
         private Label lblBalance;
         private Button btnNew;
         private CheckBox chkReconciled;
+        private BindingSource accountContextBindingSource;
+        private BindingSource accountContextBindingSource1;
+        private DataGridView gvAccount;
+        private DataGridViewTextBoxColumn Id;
+        private DataGridViewTextBoxColumn Description;
+        private DataGridViewTextBoxColumn TransType;
+        private DataGridViewTextBoxColumn TransactionDate;
+        private DataGridViewTextBoxColumn ReconciliationDate;
+        private DataGridViewTextBoxColumn Amount;
+        private DataGridViewTextBoxColumn CheckNumber;
+        private MenuStrip menuStrip1;
+        private ToolStripMenuItem fileToolStripMenuItem;
+        private ToolStripMenuItem exitToolStripMenuItem;
+        private ToolStripMenuItem helpToolStripMenuItem;
+        private ToolStripMenuItem aboutToolStripMenuItem;
     }
 }

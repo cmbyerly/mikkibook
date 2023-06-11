@@ -1,5 +1,8 @@
 namespace MikkiBookWF
 {
+    /// <summary>
+    ///   Program
+    /// </summary>
     internal static class Program
     {
         /// <summary>
