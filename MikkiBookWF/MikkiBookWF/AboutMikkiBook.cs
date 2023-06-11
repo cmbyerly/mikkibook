@@ -25,14 +25,7 @@
 
         private void textBoxDescription_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            try
-            {
-                System.Diagnostics.Process.Start("https://github.com/cmbyerly/mikkibook");
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.ToString());
-            }
+            
         }
     }
 }
