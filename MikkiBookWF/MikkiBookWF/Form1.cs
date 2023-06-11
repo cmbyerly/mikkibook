@@ -23,9 +23,7 @@ namespace MikkiBookWF
         {
             InitializeComponent();
 
-            this.gvAccount.Columns["Amount"].DefaultCellStyle.Format = "c";
-            this.gvAccount.Columns["TransactionDate"].DefaultCellStyle.Format = "d";
-            this.gvAccount.Columns["ReconciliationDate"].DefaultCellStyle.Format = "d";
+
         }
 
         /// <summary>Handles the Click event of the btnSave control.</summary>
@@ -110,10 +108,11 @@ namespace MikkiBookWF
                 txtCheckNum.Text = string.Empty;
                 dtRecDate.Value = DateTime.Now;
                 dtTransDate.Value = DateTime.Now;
+                chkReconciled.Checked = false;
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.ToString());
+                //MessageBox.Show(ex.ToString());
             }
         }
 
@@ -126,6 +125,7 @@ namespace MikkiBookWF
             {
                 this.gvAccount.Invoke(() =>
                 {
+                    this.gvAccount.DataSource = null;
                     this.transactionList.Clear();
                 });
 
@@ -151,7 +151,13 @@ namespace MikkiBookWF
                 this.gvAccount.Invoke(() =>
                 {
                     this.gvAccount.DataSource = this.transactionList;
+
+                    this.gvAccount.Columns["Amount"].DefaultCellStyle.Format = "c";
+                    this.gvAccount.Columns["TransactionDate"].DefaultCellStyle.Format = "d";
+                    this.gvAccount.Columns["ReconciliationDate"].DefaultCellStyle.Format = "d";
+
                     this.gvAccount.Refresh();
+                    this.gvAccount.Update();
                 });
 
                 tempContext.Dispose();

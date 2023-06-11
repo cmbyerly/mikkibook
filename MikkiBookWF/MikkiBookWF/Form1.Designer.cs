@@ -101,7 +101,7 @@
             // 
             chkReconciled.AutoSize = true;
             chkReconciled.Font = new Font("Times New Roman", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            chkReconciled.Location = new Point(285, 153);
+            chkReconciled.Location = new Point(285, 163);
             chkReconciled.Name = "chkReconciled";
             chkReconciled.Size = new Size(113, 19);
             chkReconciled.TabIndex = 15;
@@ -111,9 +111,9 @@
             // btnNew
             // 
             btnNew.Font = new Font("Times New Roman", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            btnNew.Location = new Point(236, 301);
+            btnNew.Location = new Point(6, 20);
             btnNew.Name = "btnNew";
-            btnNew.Size = new Size(224, 23);
+            btnNew.Size = new Size(454, 23);
             btnNew.TabIndex = 14;
             btnNew.Text = "New";
             btnNew.UseVisualStyleBackColor = true;
@@ -142,7 +142,7 @@
             btnSave.Font = new Font("Times New Roman", 9F, FontStyle.Regular, GraphicsUnit.Point);
             btnSave.Location = new Point(6, 301);
             btnSave.Name = "btnSave";
-            btnSave.Size = new Size(224, 23);
+            btnSave.Size = new Size(454, 23);
             btnSave.TabIndex = 10;
             btnSave.Text = "Save";
             btnSave.UseVisualStyleBackColor = true;
@@ -151,7 +151,7 @@
             // txtAmount
             // 
             txtAmount.Font = new Font("Times New Roman", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            txtAmount.Location = new Point(79, 200);
+            txtAmount.Location = new Point(79, 205);
             txtAmount.Name = "txtAmount";
             txtAmount.Size = new Size(381, 21);
             txtAmount.TabIndex = 9;
@@ -159,7 +159,7 @@
             // dtRecDate
             // 
             dtRecDate.Font = new Font("Times New Roman", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            dtRecDate.Location = new Point(79, 150);
+            dtRecDate.Location = new Point(79, 160);
             dtRecDate.Name = "dtRecDate";
             dtRecDate.Size = new Size(200, 21);
             dtRecDate.TabIndex = 8;
@@ -169,7 +169,7 @@
             cmbTransType.DropDownStyle = ComboBoxStyle.DropDownList;
             cmbTransType.Font = new Font("Times New Roman", 9F, FontStyle.Regular, GraphicsUnit.Point);
             cmbTransType.FormattingEnabled = true;
-            cmbTransType.Location = new Point(79, 110);
+            cmbTransType.Location = new Point(79, 125);
             cmbTransType.Name = "cmbTransType";
             cmbTransType.Size = new Size(200, 23);
             cmbTransType.TabIndex = 7;
@@ -177,7 +177,7 @@
             // dtTransDate
             // 
             dtTransDate.Font = new Font("Times New Roman", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            dtTransDate.Location = new Point(79, 65);
+            dtTransDate.Location = new Point(79, 85);
             dtTransDate.Name = "dtTransDate";
             dtTransDate.Size = new Size(200, 21);
             dtTransDate.TabIndex = 6;
@@ -185,7 +185,7 @@
             // txtDescription
             // 
             txtDescription.Font = new Font("Times New Roman", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            txtDescription.Location = new Point(79, 29);
+            txtDescription.Location = new Point(79, 54);
             txtDescription.MaxLength = 100;
             txtDescription.Name = "txtDescription";
             txtDescription.Size = new Size(381, 21);
@@ -195,7 +195,7 @@
             // 
             label5.AutoSize = true;
             label5.Font = new Font("Times New Roman", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            label5.Location = new Point(6, 203);
+            label5.Location = new Point(6, 208);
             label5.Name = "label5";
             label5.Size = new Size(47, 15);
             label5.TabIndex = 4;
@@ -205,7 +205,7 @@
             // 
             label4.AutoSize = true;
             label4.Font = new Font("Times New Roman", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            label4.Location = new Point(6, 156);
+            label4.Location = new Point(6, 166);
             label4.Name = "label4";
             label4.Size = new Size(51, 15);
             label4.TabIndex = 3;
@@ -215,7 +215,7 @@
             // 
             label3.AutoSize = true;
             label3.Font = new Font("Times New Roman", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            label3.Location = new Point(6, 113);
+            label3.Location = new Point(6, 128);
             label3.Name = "label3";
             label3.Size = new Size(64, 15);
             label3.TabIndex = 2;
@@ -225,7 +225,7 @@
             // 
             label2.AutoSize = true;
             label2.Font = new Font("Times New Roman", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            label2.Location = new Point(6, 71);
+            label2.Location = new Point(6, 91);
             label2.Name = "label2";
             label2.Size = new Size(61, 15);
             label2.TabIndex = 1;
@@ -235,7 +235,7 @@
             // 
             label1.AutoSize = true;
             label1.Font = new Font("Times New Roman", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            label1.Location = new Point(6, 32);
+            label1.Location = new Point(6, 57);
             label1.Name = "label1";
             label1.Size = new Size(64, 15);
             label1.TabIndex = 0;
@@ -372,7 +372,7 @@
             // exitToolStripMenuItem
             // 
             exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            exitToolStripMenuItem.Size = new Size(180, 22);
+            exitToolStripMenuItem.Size = new Size(93, 22);
             exitToolStripMenuItem.Text = "E&xit";
             exitToolStripMenuItem.Click += exitToolStripMenuItem_Click;
             // 
@@ -386,7 +386,7 @@
             // aboutToolStripMenuItem
             // 
             aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
-            aboutToolStripMenuItem.Size = new Size(180, 22);
+            aboutToolStripMenuItem.Size = new Size(107, 22);
             aboutToolStripMenuItem.Text = "&About";
             aboutToolStripMenuItem.Click += aboutToolStripMenuItem_Click;
             // 
